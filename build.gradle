@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id 'pmd'
+    id 'checkstyle'
+    id 'com.github.spotbugs' version '4.7.0'
+    id 'org.springframework.boot' version '2.5.3'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.jetbrains.gradle.plugin.idea-ext' version '1.0.1'
+    id 'com.google.cloud.tools.jib' version '3.1.2'
+}
+
+group = 'com.github.slamdev'
+
+fileTree('gradle') { include '*.gradle' }.each { apply from: it }
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.security:spring-security-data'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    implementation 'com.github.zhanhb:thymeleaf-layout-dialect:2.5.3'
+    runtimeOnly 'org.postgresql:postgresql'
+    runtimeOnly 'org.flywaydb:flyway-core'
+    runtimeOnly 'org.webjars:webjars-locator:0.41'
+    runtimeOnly 'org.webjars:jquery:3.6.0'
+    runtimeOnly 'org.webjars:bootstrap:5.1.0'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+//    testImplementation 'org.seleniumhq.selenium:selenium-java:4.0.0-beta-4'
+//    testImplementation 'io.github.bonigarcia:webdrivermanager:4.4.3'
+    testImplementation 'org.seleniumhq.selenium:htmlunit-driver'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+    testCompileOnly 'org.projectlombok:lombok'
+    testRuntimeOnly 'com.h2database:h2'
+}

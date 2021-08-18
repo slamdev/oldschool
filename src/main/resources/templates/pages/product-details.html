@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+<head>
+    <title>Products</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <form th:action="@{/cart}" method="post">
+        <input type="hidden" id="productId" name="productId" th:value="${product.id}"/>
+        <h1 th:text="${product.name}"></h1>
+        <img th:src="${product.image}" class="img-fluid"
+             th:alt="${product.name}">
+        <p class="lead" th:text="${product.description}"></p>
+        <div class="btn-group">
+            <input type="submit" class="btn btn-sm btn-outline-secondary" value="Buy"/>
+        </div>
+    </form>
+</div>
+</body>
+</html>

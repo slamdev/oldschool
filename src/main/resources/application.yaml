@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: oldschool
+  datasource:
+    url: jdbc:postgresql://localhost:5432/oldschool
+    username: postgres
+    password: postgres
+  jpa:
+    open-in-view: false
+  main:
+    banner-mode: off
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:db/data.sql
+server:
+  error:
+    include-stacktrace: always
+#logging:
+#  level:
+#    'org.springframework': TRACE

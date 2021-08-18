@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+<head>
+    <title>Login Page</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>Please sign in</h1>
+    <p th:if="${param.error != null}" class="error">Wrong user or password</p>
+    <form th:action="@{/login}" method="post">
+        <div th:with="inputClasses=${param.error == null ? 'form-control' : 'form-control is-invalid'}">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" th:class="${inputClasses}" id="email" name="email" aria-describedby="emailHelp"
+                       required>
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" th:class="${inputClasses}" id="password" name="password" required>
+            </div>
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="remember-me" name="remember-me">
+            <label class="form-check-label" for="remember-me">Remember me</label>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Submit"/>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+apiVersion: skaffold/v2beta20
+kind: Config
+metadata:
+  name: oldschool-backend
+build:
+  artifacts:
+    - image: slamdev/oldschool
+      jib: { }
+  local:
+    push: false
+profiles:
+  - name: dev
+    build:
+      tagPolicy:
+        envTemplate:
+          template: 'latest'
+      local:
+        push: true
+    deploy:
+      kustomize:
+        paths:
+          - deploy/dev
+  - name: prod
+    build:
+      tagPolicy:
+        envTemplate:
+          template: 'prod'
+      local:
+        push: true
+    deploy:
+      kustomize:
+        paths:
+          - deploy/prod
