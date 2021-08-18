@@ -27,6 +27,7 @@ public class SecurityConfig {
     @RequiredArgsConstructor
     static class Adapter extends WebSecurityConfigurerAdapter {
 
+        @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
         private final UserDetailsService userDetailsService;
 
         @Override
@@ -61,6 +62,7 @@ public class SecurityConfig {
     }
 
     @Bean
+    @SuppressWarnings("deprecation")
     public UserDetailsService userDetailsService() {
         UserDetails user = User.withDefaultPasswordEncoder()
                 .username("user@gmail.com")

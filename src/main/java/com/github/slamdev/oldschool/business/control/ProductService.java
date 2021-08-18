@@ -42,7 +42,7 @@ public class ProductService {
     private String randomImage() {
         double min = 1;
         double max = 5;
-        int rnd = (int) ((Math.random() * (max - min)) + min);
+        int rnd = (int) (Math.random() * (max - min) + min);
         return String.format("https://www.gstatic.com/webp/gallery/%d.jpg", rnd);
     }
 }
