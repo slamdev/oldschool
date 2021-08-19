@@ -1,6 +1,6 @@
 package com.github.slamdev.oldschool.business.boundary;
 
-import com.github.slamdev.oldschool.business.control.ProductService;
+import com.github.slamdev.oldschool.business.control.CartService;
 import com.github.slamdev.oldschool.business.entity.ProductDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Slf4j
 @Controller
@@ -22,32 +24,20 @@ import java.util.*;
 @RequiredArgsConstructor
 public class CartController {
 
-    private static final String CART_SESSION_ATTR = "cart";
-
-    private final ProductService productService;
+    private final CartService cartService;
 
     @GetMapping
     @PreAuthorize("isAuthenticated()")
     public ModelAndView cartPage(HttpSession session) {
-        List<UUID> productIds = getAddedProducts(session);
-        List<ProductDto> products = productService.getProducts(productIds);
+        List<ProductDto> products = cartService.getCartProducts(session);
         return new ModelAndView("pages/cart", Map.of("products", products));
     }
 
     @PostMapping
     @PreAuthorize("isAuthenticated()")
     public String addToCart(RedirectAttributes redirectAttributes, @RequestParam UUID productId, HttpSession session) {
-        List<UUID> productIds = getAddedProducts(session);
-        productIds.add(productId);
-        session.setAttribute(CART_SESSION_ATTR, productIds);
+        cartService.addProduct(session, productId);
         redirectAttributes.addAttribute("id", productId);
         return "redirect:/products";
-    }
-
-    @SuppressWarnings("unchecked")
-    private List<UUID> getAddedProducts(HttpSession session) {
-        return Optional
-                .ofNullable((List<UUID>) session.getAttribute(CART_SESSION_ATTR))
-                .orElseGet(ArrayList::new);
     }
 }
