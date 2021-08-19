@@ -21,7 +21,12 @@ public class ProductService {
 
     public List<ProductDto> getAllProducts() {
         return Streams.stream(repository.findAll())
-                .peek(m -> log.info("{}", m))
+                .map(this::asDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<ProductDto> getProducts(List<UUID> productIds) {
+        return Streams.stream(repository.findAllById(productIds))
                 .map(this::asDto)
                 .collect(Collectors.toList());
     }

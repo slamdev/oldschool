@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+<head>
+    <title>Cart</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>Cart</h1>
+    <div class="row">
+        <!--/*@thymesVar id="products" type="java.util.List<com.github.slamdev.oldschool.business.entity.ProductDto>"*/-->
+        <div th:each="p: ${products}">
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img th:src="${p.image}" class="img-fluid rounded-start" th:alt="${p.name}">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${p.name}"></h5>
+                            <p class="card-text" th:text="${p.description}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
