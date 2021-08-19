@@ -49,7 +49,7 @@
     </div>
 </main>
 
-<footer class="footer">
+<footer class="footer" th:if="${@environment.getProperty('server.error.include-stacktrace') == 'always'}">
     <a class="link-info" data-bs-toggle="collapse" href="#debug" role="button" aria-expanded="false"
        aria-controls="debug">debug</a>
     <div class="collapse" id="debug">
