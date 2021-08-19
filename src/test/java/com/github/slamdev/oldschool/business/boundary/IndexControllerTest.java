@@ -1,9 +1,12 @@
 package com.github.slamdev.oldschool.business.boundary;
 
 import com.github.slamdev.oldschool.integration.HtmlUnitTest;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 
@@ -18,7 +21,21 @@ class IndexControllerTest {
 
     @Test
     void should_show_index_page() {
-        webDriver.get("/");
-        assertThat(webDriver.findElement(By.tagName("h1")).getText()).isEqualTo("Home page");
+        IndexPage page = PageFactory.initElements(webDriver, IndexPage.class);
+        page.open();
+        assertThat(page.header.getText()).isEqualTo("Home page");
+    }
+
+    @RequiredArgsConstructor
+    public static class IndexPage {
+
+        private final WebDriver webDriver;
+
+        @FindBy(tagName = "h1")
+        WebElement header;
+
+        public void open() {
+            webDriver.get("/");
+        }
     }
 }

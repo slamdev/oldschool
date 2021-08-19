@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase
-class OldschoolApplicationTests {
+class OldschoolApplicationTest {
 
     @Test
     void should_load_context() {
