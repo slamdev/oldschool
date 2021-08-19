@@ -23,6 +23,7 @@ dependencies {
     implementation 'org.springframework.security:spring-security-data'
     implementation 'org.springframework.session:spring-session-jdbc'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+    implementation 'ch.qos.logback:logback-access'
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     implementation 'com.github.zhanhb:thymeleaf-layout-dialect:2.5.3'

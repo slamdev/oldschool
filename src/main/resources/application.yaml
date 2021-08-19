@@ -20,6 +20,10 @@ spring:
 server:
   error:
     include-stacktrace: always
+oldschool:
+  access-logs:
+    enabled: true
+    config-file: logback-access.xml
 ---
 spring:
   config.activate.on-profile: dev
