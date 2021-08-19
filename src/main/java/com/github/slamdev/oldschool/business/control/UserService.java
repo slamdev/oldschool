@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UserService {
 
-    private static final GrantedAuthority USER_ROLE = new SimpleGrantedAuthority("USER_ROLE");
+    private static final GrantedAuthority USER_ROLE = new SimpleGrantedAuthority("ROLE_USER");
 
     private final UserDetailsManager userDetailsManager;
 
