@@ -2,6 +2,7 @@ package com.github.slamdev.oldschool.integration;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.SilentJavaScriptErrorListener;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.web.htmlunit.webdriver.LocalHostWebConnectionHtmlUnitDriver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
@@ -16,6 +17,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
+@AutoConfigureTestDatabase // SecurityConfig requires javax.sql.DataSource
 @Import({SecurityConfig.class, HtmlUnitTest.HtmlUnitDriverConfiguration.class})
 public @interface HtmlUnitTest {
 
