@@ -21,9 +21,11 @@ server:
   error:
     include-stacktrace: always
 oldschool:
-  access-logs:
-    enabled: true
-    config-file: logback-access.xml
+  logs:
+    appender: CONSOLE
+    access:
+      enabled: true
+      config-file: logback-access.xml
 ---
 spring:
   config.activate.on-profile: dev
@@ -31,6 +33,11 @@ spring:
     url: jdbc:postgresql://postgres:5432/oldschool
     username: postgres
     password: postgres
+oldschool:
+  logs:
+    appender: JSON
+    access:
+      config-file: logback-access-json.xml
 ---
 spring:
   config.activate.on-profile: prod
@@ -44,3 +51,8 @@ spring:
 server:
   error:
     include-stacktrace: never
+oldschool:
+  logs:
+    appender: JSON
+    access:
+      config-file: logback-access-json.xml

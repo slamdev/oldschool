@@ -9,12 +9,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConditionalOnProperty("oldschool.access-logs.enabled")
+@ConditionalOnProperty("oldschool.logs.access.enabled")
 public class AccessLogsConfiguration {
 
     @Bean
     public WebServerFactoryCustomizer<TomcatServletWebServerFactory> accessLogsCustomizer(
-            @Value("${oldschool.access-logs.config-file}") String configFile) {
+            @Value("${oldschool.logs.access.config-file}") String configFile) {
         return factory -> {
             LogbackValve logbackValve = new LogbackValve();
             logbackValve.setQuiet(true);
