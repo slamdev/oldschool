@@ -13,11 +13,7 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import javax.sql.DataSource;
 
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(
-        prePostEnabled = true,
-        securedEnabled = true,
-        jsr250Enabled = true
-)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 @SuppressWarnings("PMD.AvoidFieldNameMatchingMethodName")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -35,7 +31,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests(r -> r.anyRequest().permitAll())
                 .formLogin(f -> f
                         .loginPage("/login")
-                        .defaultSuccessUrl("/")
                         .usernameParameter("email")
                 )
                 .logout(l -> l.logoutSuccessUrl("/"))

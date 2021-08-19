@@ -29,7 +29,7 @@
                     <a class="nav-link" href="/products">Products</a>
                 </li>
             </ul>
-            <a class="btn btn-outline-success" href="/login" sec:authorize="${isAuthenticated() == false}">Login</a>
+            <a class="btn btn-outline-success" href="/login" sec:authorize="${isAnonymous()}">Login</a>
             <form class="d-flex" method="post" sec:authorize="${isAuthenticated()}" th:action="@{/logout}">
                 <input type="submit" class="btn btn-outline-danger" value="Logout"/>
             </form>

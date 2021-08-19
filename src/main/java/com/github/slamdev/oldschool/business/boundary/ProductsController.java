@@ -5,7 +5,6 @@ import com.github.slamdev.oldschool.business.entity.ProductDto;
 import com.github.slamdev.oldschool.integration.ErrorModels;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +24,6 @@ public class ProductsController {
     private final ProductService productService;
 
     @GetMapping
-    @Secured("ROLE_USER")
     public ModelAndView productsPage() {
         List<ProductDto> products = productService.getAllProducts();
         return new ModelAndView("pages/products", Map.of("products", products));
