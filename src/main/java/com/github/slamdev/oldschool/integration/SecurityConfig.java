@@ -5,10 +5,10 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 
 import javax.sql.DataSource;
@@ -19,11 +19,11 @@ import javax.sql.DataSource;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
-    private final UserDetailsService userDetailsService;
+    private final UserDetailsManager userDetailsManager;
 
     public SecurityConfig(DataSource dataSource) {
         this.passwordEncoder = new BCryptPasswordEncoder();
-        this.userDetailsService = new JdbcUserDetailsManager(dataSource);
+        this.userDetailsManager = new JdbcUserDetailsManager(dataSource);
     }
 
     @Override
@@ -45,8 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     @Override
-    public UserDetailsService userDetailsService() {
-        return userDetailsService;
+    public UserDetailsManager userDetailsService() {
+        return userDetailsManager;
     }
 
     @Bean

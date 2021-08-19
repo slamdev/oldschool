@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/layout}">
+<head>
+    <title>Registration Page</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>Please register</h1>
+    <p th:if="${param.error != null}" class="error">Wrong user or password</p>
+    <form th:action="@{/register}" method="post">
+        <div th:with="inputClasses=${param.error == null ? 'form-control' : 'form-control is-invalid'}">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" th:class="${inputClasses}" id="email" name="email" aria-describedby="emailHelp"
+                       required>
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" th:class="${inputClasses}" id="password" name="password" required>
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Submit"/>
+    </form>
+</div>
+</body>
+</html>
