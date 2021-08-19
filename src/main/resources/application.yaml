@@ -20,3 +20,23 @@ spring:
 server:
   error:
     include-stacktrace: always
+---
+spring:
+  config.activate.on-profile: dev
+  datasource:
+    url: jdbc:postgresql://postgres:5432/oldschool
+    username: postgres
+    password: postgres
+---
+spring:
+  config.activate.on-profile: prod
+  datasource:
+    url: jdbc:postgresql://postgres:5432/oldschool
+    username: postgres
+    password: postgres
+  sql:
+    init:
+      mode: never
+server:
+  error:
+    include-stacktrace: never
