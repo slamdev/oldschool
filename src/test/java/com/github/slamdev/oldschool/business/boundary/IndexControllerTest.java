@@ -2,6 +2,7 @@ package com.github.slamdev.oldschool.business.boundary;
 
 import com.github.slamdev.oldschool.integration.HtmlUnitTest;
 import lombok.RequiredArgsConstructor;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,9 +20,15 @@ class IndexControllerTest {
     @Autowired
     private WebDriver webDriver;
 
+    private IndexPage page;
+
+    @BeforeEach
+    void initPage() {
+        page = PageFactory.initElements(webDriver, IndexPage.class);
+    }
+
     @Test
     void should_show_index_page() {
-        IndexPage page = PageFactory.initElements(webDriver, IndexPage.class);
         page.open();
         assertThat(page.header.getText()).isEqualTo("Home page");
     }
@@ -34,7 +41,7 @@ class IndexControllerTest {
         @FindBy(tagName = "h1")
         WebElement header;
 
-        public void open() {
+        void open() {
             webDriver.get("/");
         }
     }
