@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 
 import javax.sql.DataSource;
 
@@ -34,7 +35,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .usernameParameter("email")
                 )
                 .logout(l -> l.logoutSuccessUrl("/"))
-                .rememberMe();
+                .rememberMe(r -> {
+                            SpringSessionRememberMeServices svc = new SpringSessionRememberMeServices();
+                            svc.setAlwaysRemember(true);
+                            r.rememberMeServices(svc).alwaysRemember(true);
+                        }
+                );
     }
 
     @Bean
