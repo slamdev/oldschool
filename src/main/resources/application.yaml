@@ -22,13 +22,33 @@ spring:
   sleuth:
     sampler:
       probability: 1
+  cloud:
+    discovery:
+      enabled: false
+  lifecycle:
+    timeout-per-shutdown-phase: 1m
 server:
   error:
     include-stacktrace: always
+  shutdown: graceful
 decorator:
   datasource:
     p6spy:
       enable-logging: false
+management:
+  server:
+    port: 8081
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      probes:
+        enabled: true
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 oldschool:
   logs:
     appender: CONSOLE

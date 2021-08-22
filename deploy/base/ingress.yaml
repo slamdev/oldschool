@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: oldschool
+spec:
+  rules:
+    - host: REPLACE
+      http:
+        paths:
+          - backend:
+              service:
+                name: oldschool
+                port:
+                  name: http
+            path: /*
+            pathType: Prefix

@@ -1,15 +1,50 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: oldschool-backend
+  name: oldschool
 spec:
   template:
     spec:
-      imagePullSecrets:
-        - name: regcred
       containers:
         - name: app
           image: slamdev/oldschool
           ports:
             - name: http
               containerPort: 8080
+            - name: http-management
+              containerPort: 8081
+          env:
+            - name: APP_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.labels['app.kubernetes.io/name']
+            - name: APP_ENV
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.labels['env']
+            - name: HOST_IP
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.hostIP
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: SPRING_PROFILES_ACTIVE
+              value: '$(APP_ENV)'
+          startupProbe:
+            failureThreshold: 60
+            httpGet:
+              path: /actuator/health
+              port: http-management
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: http-management
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: http-management
