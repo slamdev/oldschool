@@ -17,9 +17,18 @@ spring:
     timeout: 24h
     jdbc:
       initialize-schema: never
+  zipkin:
+    enabled: false
+  sleuth:
+    sampler:
+      probability: 1
 server:
   error:
     include-stacktrace: always
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: false
 oldschool:
   logs:
     appender: CONSOLE

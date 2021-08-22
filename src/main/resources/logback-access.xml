@@ -1,5 +1,7 @@
 <configuration>
-    <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_ACCESS_LOG_PATTERN:-%t{yyyy-MM-dd HH:mm:ss.SSS} %blue(ACCSS) %magenta(${PID:- }) --- [%15.15I] %s %r %b}"/>
+    <conversionRule conversionWord="sleuth" converterClass="com.github.slamdev.oldschool.integration.AccessLogSleuthConverter" />
+    <property name="applicationName" value="oldschool" />
+    <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_ACCESS_LOG_PATTERN:-%t{yyyy-MM-dd HH:mm:ss.SSS} %blue(ACCSS) %blue([${applicationName},%sleuth{traceId},%sleuth{spanId}]) %magenta(${PID:- }) --- [%15.15I] %s %r %b}"/>
     <property name="CONSOLE_LOG_CHARSET" value="${CONSOLE_LOG_CHARSET:-default}"/>
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
